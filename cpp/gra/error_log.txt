@@ -1,0 +1,3 @@
+main.cpp:17:1: error: ‘x’ does not name a type
+   17 | x = int(input("dwunastnica"))
+      | ^
