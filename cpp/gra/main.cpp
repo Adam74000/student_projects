@@ -1,4 +1,7 @@
 
+
+
+
 #include <iostream>
 using namespace std;
 
@@ -31,11 +34,12 @@ int main() {
             continue;
         }
 
-        
+        // Zapisanie ruchu gracza
         plansza[rzad][kolumna] = gracz;
         ruchi++;
 
-        
+        // Sprawdzanie wygranej
+        // Sprawdzanie wierszy
         for (int i = 0; i < 3; i++) {
             if (plansza[i][0] == gracz && plansza[i][1] == gracz && plansza[i][2] == gracz) {
                 graTrwa = false;
@@ -43,7 +47,7 @@ int main() {
             }
         }
 
-        
+        // Sprawdzanie kolumn
         for (int i = 0; i < 3; i++) {
             if (plansza[0][i] == gracz && plansza[1][i] == gracz && plansza[2][i] == gracz) {
                 graTrwa = false;
@@ -51,7 +55,7 @@ int main() {
             }
         }
 
-        
+        // Sprawdzanie przekątnych
         if (plansza[0][0] == gracz && plansza[1][1] == gracz && plansza[2][2] == gracz) {
             graTrwa = false;
         }
@@ -59,12 +63,12 @@ int main() {
             graTrwa = false;
         }
 
-        
+        // Sprawdzanie remisu
         if (ruchi == 9) {
             graTrwa = false;
         }
 
-        
+        // Zmiana gracza
         if (gracz == 'X') {
             gracz = 'O';
         } else {
@@ -72,7 +76,7 @@ int main() {
         }
     }
 
-    
+    // Pokazywanie wyniku gry
     cout << endl;
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
