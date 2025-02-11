@@ -1,0 +1,73 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    srand(time(0));  // Inicjalizacja generatora liczb losowych
+
+    int gl = 7;  // Liczba tur gry
+    char p[3][3];  // Plansza 3x3
+
+    // Inicjalizacja planszy
+    for(int x = 0; x < 3; x++){
+        for(int y = 0; y < 3; y++){
+            p[x][y] = '?';
+        }
+    }
+
+    // Losowanie pozycji bomb
+    int bomb1x = rand() % 3;
+    int bomb1y = rand() % 3;
+    int bomb2x, bomb2y;
+
+    do {
+        bomb2x = rand() % 3;
+        bomb2y = rand() % 3;
+    } while (bomb1x == bomb2x && bomb1y == bomb2y);  // Unikamy tej samej pozycji
+
+    // Pętla gry
+    while(gl > 0){
+        cout << endl;
+
+        // Rysowanie planszy
+        for(int x1 = 0; x1 < 3; x1++){
+            for(int y1 = 0; y1 < 3; y1++){
+                cout << p[x1][y1] << " ";
+            }
+            cout << endl;
+        }
+
+        // Wybór pola
+        int x, y;
+        cout << "Wybierz pole (x na y): ";
+        cin >> x >> y;
+
+        // Sprawdzanie poprawności wyboru
+        if(x >= 3  y >= 3  x < 0  y < 0){
+            cout << "To pole nie istnieje. Wybierz inne." << endl;
+            continue;
+        }
+
+        // Sprawdzanie, czy pole jest już odkryte
+        if (p[x][y] != '?'){
+            cout << "To pole jest już zajęte. Wybierz inne." << endl;
+            continue;
+        }
+
+        // Sprawdzanie, czy trafiono bombę
+        if ((x == bomb1x && y == bomb1y)  (x == bomb2x && y == bomb2y)){
+            cout << " Strzeliłeś w bombę! Przegrałeś. " << endl;
+            break;
+        }
+
+        // Odkrycie pola i kontynuowanie gry
+        cout << " Strzeliłeś w puste pole. Grasz dalej!" << endl;
+        p[x][y] = 'X';
+        gl--;
+    }
+
+    cout << "Koniec gry!" << endl;
+    return 0;
+}
